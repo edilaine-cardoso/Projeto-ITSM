@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+InfraITSolution.db
+*.db-shm
+*.db-wal
+bin/
+obj/
+.vs/
+*.user
+*.suo
+=======
+# AL #
+# Template for AL projects...
+.vscode/
+.alcache/
+...
+
+
+
 # Banco de dados SQLite
 *.db
 *.db-shm
