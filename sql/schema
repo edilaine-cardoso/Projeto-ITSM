@@ -1,0 +1,91 @@
+create table Departments
+(
+    id   INTEGER
+        primary key autoincrement,
+    name VARCHAR(50) not null
+);
+
+create table Skills
+(
+    id   INTEGER
+        primary key autoincrement,
+    name VARCHAR(50) not null
+        unique
+);
+
+create table TicketStatus
+(
+    id   INTEGER
+        primary key autoincrement,
+    name VARCHAR(20) not null
+        unique
+);
+
+create table Users
+(
+    id            INTEGER
+        primary key autoincrement,
+    full_name     VARCHAR(100)                       not null,
+    email         VARCHAR(100)                       not null
+        unique,
+    password_hash TEXT                               not null,
+    role          VARCHAR(20)                        not null,
+    department_id INTEGER                            not null
+        references Departments,
+    created_at    DATETIME default CURRENT_TIMESTAMP not null
+);
+
+create table Assets
+(
+    id            INTEGER
+        primary key autoincrement,
+    type          VARCHAR(20) not null,
+    brand         VARCHAR(50),
+    model         VARCHAR(50),
+    serial_number VARCHAR(50)
+        unique,
+    location      VARCHAR(100),
+    owner_id      INTEGER
+        references Users,
+    check (type IN ('hardware', 'software'))
+);
+
+create table Technicians
+(
+    user_id            INTEGER
+        primary key
+        references Users,
+    availability_hours INTEGER           not null,
+    current_workload   INTEGER default 0 not null
+);
+
+create table TechnicianSkills
+(
+    technician_id INTEGER not null
+        references Technicians,
+    skill_id      INTEGER not null
+        references Skills,
+    primary key (technician_id, skill_id)
+);
+
+create table Tickets
+(
+    id                     INTEGER
+        primary key autoincrement,
+    title                  VARCHAR(100)                       not null,
+    description            TEXT                               not null,
+    priority               VARCHAR(10)                        not null,
+    status_id              INTEGER                            not null
+        references TicketStatus,
+    assigned_technician_id INTEGER
+        references Technicians,
+    asset_id               INTEGER
+        references Assets,
+    created_by_id          INTEGER                            not null
+        references Users,
+    created_at             DATETIME default CURRENT_TIMESTAMP not null,
+    updated_at             DATETIME,
+    check (priority IN ('low', 'medium', 'high'))
+);
+
+
