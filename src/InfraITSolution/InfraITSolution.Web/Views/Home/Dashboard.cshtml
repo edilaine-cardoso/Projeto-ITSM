@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-4">
+    <h1>Welcome, @User.Identity.Name!</h1>
+    <p>You are now logged in to the InfraIT Solution system.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">My Tickets</h5>
+                    <p class="card-text">View and manage your support tickets.</p>
+                    <a href="#" class="btn btn-primary">Go to Tickets</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">New Ticket</h5>
+                    <p class="card-text">Open a new support request.</p>
+                    <a href="#" class="btn btn-success">Create Ticket</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Profile</h5>
+                    <p class="card-text">Update your profile settings.</p>
+                    <a href="#" class="btn btn-info">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
