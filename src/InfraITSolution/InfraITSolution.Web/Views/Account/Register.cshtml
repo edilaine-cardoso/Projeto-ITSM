@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5">
+            <div class="text-center mb-4">
+                <img src="~/images/logo-hero.webp" alt="Logo" style="height:60px" class="mb-3" />
+                <h1 class="h4 fw-bold">Create an account</h1>
+                <p class="text-muted">Sign up to submit and track tickets</p>
+            </div>
+
+            <form id="registerForm" novalidate>
+                <div class="form-floating mb-3">
+                    <input id="name" class="form-control" placeholder="Full name" />
+                    <label for="name">Full name</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input id="email" class="form-control" placeholder="name@example.com" />
+                    <label for="email">Email address</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input id="password" type="password" class="form-control" placeholder="Password" />
+                    <label for="password">Password</label>
+                </div>
+
+                <div class="d-grid d-md-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-primary btn-lg flex-md-fill">Create account</button>
+                    <a href="/Account/Login" class="btn btn-outline-secondary btn-lg flex-md-fill">Back to login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+          e.preventDefault();
+          // basic front-end check
+          var email = document.getElementById('email').value.trim();
+          var pwd = document.getElementById('password').value.trim();
+          if (!email || !pwd) {
+            alert('Please enter email and password (UI demo).');
+            return;
+          }
+          // For UI demo redirect to dashboard (simulate successful registration)
+          window.location.href = '/Home/Dashboard';
+        });
+    </script>
+}
