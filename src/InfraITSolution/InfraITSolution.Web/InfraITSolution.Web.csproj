@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
+    <Folder Include="Views\Tickets\" />
   </ItemGroup>
 
 </Project>

@@ -114,3 +114,63 @@ body {
     }
     
 }
+
+.form-control::placeholder {
+    color: #6c757d; 
+    opacity: 1;
+}
+
+
+.form-control.form-control-lg {
+    padding: .75rem 1rem;
+    line-height: 1.25;
+}
+
+
+.btn-lg.flex-fill {
+    min-width: 0; 
+}
+
+
+@media (min-width: 768px) {
+    .btn-lg.flex-fill {
+        min-width: 140px;
+    }
+    
+}
+
+
+.form-label {
+    margin-bottom: .25rem;
+}
+
+
+.form-control:focus {
+    box-shadow: 0 0 0 .15rem rgba(13,110,253,0.25); 
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+
+.form-floating > .form-control {
+    height: auto;
+    padding: .75rem 1rem;
+}
+
+
+.d-grid.d-md-flex {
+    align-items: stretch;
+}
+
+.flex-md-fill {
+    min-width: 0;
+}
+
+
+.btn-lg {
+    padding: .5rem 1rem;
+}

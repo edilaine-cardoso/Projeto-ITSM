@@ -1,37 +1,104 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="container mt-4">
-    <h1>Welcome, @User.Identity.Name!</h1>
-    <p>You are now logged in to the InfraIT Solution system.</p>
+<div class="container py-4">
+    <!-- Cabeçalho da Dashboard -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">ITSM Dashboard</h1>
+            <p class="text-muted">Welcome back! Here is a summary of the infrastructure status.</p>
+        </div>
+        <a href="/Tickets/Create" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> New Ticket
+        </a>
+    </div>
 
+    <!-- Cards de Resumo (Widgets) -->
+    <div class="row g-3">
+        <!-- Card: Tickets Abertos -->
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card border-left-primary shadow h-100 py-2 border-0 border-start border-4 border-primary">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 small">Open Tickets (Total)</div>
+                            <div class="h5 mb-0 font-weight-bold">12</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Atribuídos a Mim -->
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card border-left-success shadow h-100 py-2 border-0 border-start border-4 border-success">
+                <div class="card-body">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1 small">Assigned to Me</div>
+                    <div class="h5 mb-0 font-weight-bold">3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Ativos Críticos -->
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card border-left-warning shadow h-100 py-2 border-0 border-start border-4 border-warning">
+                <div class="card-body">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1 small">Critical Assets</div>
+                    <div class="h5 mb-0 font-weight-bold">45</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: SLA Breaches -->
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card border-left-danger shadow h-100 py-2 border-0 border-start border-4 border-danger">
+                <div class="card-body">
+                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1 small">SLA Warnings</div>
+                    <div class="h5 mb-0 font-weight-bold text-danger">1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Tickets Recentes -->
     <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">My Tickets</h5>
-                    <p class="card-text">View and manage your support tickets.</p>
-                    <a href="#" class="btn btn-primary">Go to Tickets</a>
+        <div class="col-12">
+            <div class="card shadow mb-4 border-0">
+                <div class="card-header py-3 bg-white d-flex justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Recent Incident Tickets</h6>
+                    <a href="/Tickets" class="small text-decoration-none">View All</a>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">New Ticket</h5>
-                    <p class="card-text">Open a new support request.</p>
-                    <a href="#" class="btn btn-success">Create Ticket</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Profile</h5>
-                    <p class="card-text">Update your profile settings.</p>
-                    <a href="#" class="btn btn-info">Edit Profile</a>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Subject</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#1024</td>
+                                    <td>VPN Connection unstable in Porto Office</td>
+                                    <td><span class="badge bg-info">In Progress</span></td>
+                                    <td><span class="badge bg-danger">High</span></td>
+                                    <td>2 hours ago</td>
+                                </tr>
+                                <tr>
+                                    <td>#1023</td>
+                                    <td>Printer HP-Floor2 needs toner</td>
+                                    <td><span class="badge bg-warning text-dark">Open</span></td>
+                                    <td><span class="badge bg-secondary">Low</span></td>
+                                    <td>5 hours ago</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

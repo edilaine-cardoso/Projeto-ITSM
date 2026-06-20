@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="h4">Dashboard</h2>
+            <p class="text-muted">Overview of tickets and workload (mock data)</p>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-12 col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Open Tickets</h5>
+                    <p class="display-6 mb-0">12</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Assigned to you</h5>
+                    <p class="display-6 mb-0">3</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">SLA breaches</h5>
+                    <p class="display-6 mb-0 text-danger">1</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Recent tickets</h5>
+                    <ul class="list-group list-group-flush mt-2">
+                        <li class="list-group-item">#1023 - Cannot access VPN <span class="badge bg-warning float-end">High</span></li>
+                        <li class="list-group-item">#1019 - Printer jam <span class="badge bg-secondary float-end">Low</span></li>
+                        <li class="list-group-item">#1015 - Server disk warning <span class="badge bg-danger float-end">Critical</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

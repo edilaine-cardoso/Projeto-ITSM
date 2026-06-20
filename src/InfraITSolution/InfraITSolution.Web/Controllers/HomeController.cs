@@ -19,7 +19,9 @@ namespace InfraITSolution.Web.Controllers
             return View();
         }
 
-        [Authorize] 
+        //[Authorize] isso deixa segura
+
+        [AllowAnonymous]
         public IActionResult Dashboard()
         {
             return View();
