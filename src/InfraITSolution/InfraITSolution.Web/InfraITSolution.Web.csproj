@@ -16,8 +16,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.9" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Tickets\" />
-  </ItemGroup>
-
 </Project>
