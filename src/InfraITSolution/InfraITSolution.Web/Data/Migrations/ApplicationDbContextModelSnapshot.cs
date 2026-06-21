@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 
+
+
 namespace InfraITSolution.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]

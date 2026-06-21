@@ -1,8 +1,8 @@
-﻿@{
+﻿@model RegisterViewModel
+
+@{
     ViewData["Title"] = "Register";
 }
-
-
 
 <div class="container py-5">
     <div class="row justify-content-center">
@@ -13,52 +13,53 @@
                 <p class="text-muted">Sign up to submit and track tickets</p>
             </div>
 
-            <form id="registerForm" novalidate>
+            <form asp-action="Register" method="post">
                 <div class="form-floating mb-3">
-                    <input id="name" name="name" class="form-control" placeholder="Full name" required />
-                    <label for="name">Full name</label>
-                    <div id="err-name" class="field-error">Please enter your full name.</div>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input id="email" name="email" type="email" class="form-control" placeholder="name@example.com" required />
-                    <label for="email">Email address</label>
-                    <div id="err-email" class="field-error">Please enter a valid email address.</div>
-                </div>
-
-                <div class="form-floating mb-3 position-relative">
-                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" required minlength="6" />
-                    <label for="password">Password</label>
-                    <button type="button" id="togglePwd" class="btn btn-sm btn-outline-secondary position-absolute" style="top:8px; right:8px;">Show</button>
-                    <div id="err-password" class="field-error">Password must be at least 6 characters.</div>
-                    <div class="mt-2">
-                        <div class="pw-strength" aria-hidden="true">
-                            <i id="pwBar" class=""></i>
-                        </div>
-                        <small id="pwHint" class="text-muted">Use at least 6 characters; include letters and numbers</small>
-                    </div>
+                    <input asp-for="FullName" class="form-control" placeholder="Full name" />
+                    <label asp-for="FullName"></label>
+                    <span asp-validation-for="FullName" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password" required />
-                    <label for="confirmPassword">Confirm Password</label>
-                    <div id="err-confirm" class="field-error">Passwords do not match.</div>
+                    <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+                    <label asp-for="Email"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                  <label for="department" class="form-label">Department</label>
-                  <select id="department" name="department" class="form-select" required>
-                    <option value="">-- Select department --</option>
-                    <option value="1">Human Resources</option>
-                    <option value="2">Finance</option>
-                    <option value="3">Administration</option>
-                    <option value="4">IT (Information Technology)</option>
-                  </select>
-                  <div id="err-dept" class="field-error">Please select your department.</div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Password" class="form-control" placeholder="Password" />
+                    <label asp-for="Password"></label>
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
 
-                <!-- Hidden role: public registration always employee -->
-                <input type="hidden" name="role" value="Employee" />
+                <div class="form-floating mb-3">
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                    <label asp-for="ConfirmPassword"></label>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select asp-for="Role" class="form-select">
+                        <option value="">Select role</option>
+                        <option value="admin">Admin</option>
+                        <option value="technician">Technician</option>
+                        <option value="employee">Employee</option>
+                    </select>
+                    <label asp-for="Role"></label>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select asp-for="DepartmentId" class="form-select">
+                        <option value="">Select department</option>
+                        <option value="1">IT</option>
+                        <option value="2">HR</option>
+                        <option value="3">Finance</option>
+                        <option value="4">Admin</option>
+                    </select>
+                    <label asp-for="DepartmentId"></label>
+                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                </div>
 
                 <div class="d-grid d-md-flex gap-2 mt-3">
                     <button type="submit" class="btn btn-primary btn-lg flex-md-fill">Create account</button>
@@ -70,129 +71,5 @@
 </div>
 
 @section Scripts {
-    <script>
-        (function () {
-            const form = document.getElementById('registerForm');
-            const nameEl = document.getElementById('name');
-            const emailEl = document.getElementById('email');
-            const pwdEl = document.getElementById('password');
-            const confirmEl = document.getElementById('confirmPassword');
-            const deptEl = document.getElementById('department');
-
-            const errName = document.getElementById('err-name');
-            const errEmail = document.getElementById('err-email');
-            const errPwd = document.getElementById('err-password');
-            const errConfirm = document.getElementById('err-confirm');
-            const errDept = document.getElementById('err-dept');
-
-            const toggleBtn = document.getElementById('togglePwd');
-            const pwBar = document.getElementById('pwBar');
-            const pwHint = document.getElementById('pwHint');
-
-            function validateEmail(email) {
-                // Simple RFC-ish email check
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            }
-
-            function pwScore(pw) {
-                if (!pw) return 0;
-                let score = 0;
-                if (pw.length >= 6) score++;
-                if (/[0-9]/.test(pw)) score++;
-                if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
-                if (/[^A-Za-z0-9]/.test(pw)) score++;
-                return score; // 0..4
-            }
-
-            function updatePwMeter() {
-                const score = pwScore(pwdEl.value);
-                let pct = Math.min(100, score * 25);
-                pwBar.style.width = pct + '%';
-                pwBar.className = '';
-                if (score <= 1) pwBar.classList.add('pw-weak');
-                else if (score === 2 || score === 3) pwBar.classList.add('pw-medium');
-                else pwBar.classList.add('pw-strong');
-            }
-
-            toggleBtn.addEventListener('click', function () {
-                if (pwdEl.type === 'password') {
-                    pwdEl.type = 'text';
-                    toggleBtn.textContent = 'Hide';
-                } else {
-                    pwdEl.type = 'password';
-                    toggleBtn.textContent = 'Show';
-                }
-            });
-
-            pwdEl.addEventListener('input', function () {
-                updatePwMeter();
-                // live validation
-                if (pwdEl.value.length >= 6) {
-                    errPwd.classList.remove('show');
-                }
-            });
-
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                let ok = true;
-
-                // Name
-                if (!nameEl.value.trim()) {
-                    errName.classList.add('show');
-                    ok = false;
-                } else {
-                    errName.classList.remove('show');
-                }
-
-                // Email
-                if (!validateEmail(emailEl.value.trim())) {
-                    errEmail.classList.add('show');
-                    ok = false;
-                } else {
-                    errEmail.classList.remove('show');
-                }
-
-                // Password
-                if (pwdEl.value.length < 6) {
-                    errPwd.classList.add('show');
-                    ok = false;
-                } else {
-                    errPwd.classList.remove('show');
-                }
-
-                // Confirm
-                if (confirmEl.value !== pwdEl.value) {
-                    errConfirm.classList.add('show');
-                    ok = false;
-                } else {
-                    errConfirm.classList.remove('show');    
-                }
-
-                // Department
-                if (!deptEl.value) {
-                    errDept.classList.add('show');
-                    ok = false;
-                } else {
-                    errDept.classList.remove('show');
-                }
-
-                if (!ok) {
-                    // focus first invalid
-                    const firstErr = document.querySelector('.field-error.show');
-                    if (firstErr) {
-                        firstErr.previousElementSibling?.focus?.();
-                    }
-                    return;
-                }
-
-                // Simular envio (front-only). Redireciona para o Dashboard.
-                // Em integração real: POST para o servidor (fetch/ajax ou form submit)
-                window.location.href = '/Home/Dashboard';
-            });
-
-            // Inicializa medidor (caso haja valor preenchido)
-            updatePwMeter();
-        })();
-    </script>
+    <partial name="_ValidationScriptsPartial" />
 }

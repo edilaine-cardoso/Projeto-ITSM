@@ -172,3 +172,13 @@ body {
     .field-error.show {
         display: block;
     }
+/* garantir que placeholders não entrem em conflito com labels no form-floating */
+.form-floating > .form-control::placeholder {
+    color: transparent;
+    text-align: start; 
+}
+
+.form-floating > .form-control:focus::placeholder {
+    color: var(--bs-secondary-color, #6c757d);
+    text-align: start;
+}

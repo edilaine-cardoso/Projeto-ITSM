@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
-namespace InfraITSolution.Web.Models
+namespace InfraITSolution.Web.Data
 {
     public class ApplicationUser : IdentityUser
     {
         public string FullName { get; set; }
-        public int DepartmentId { get; set; }
     }
 }
