@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using InfraITSolution.Web.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace InfraITSolution.Web.Data
@@ -10,6 +11,6 @@ namespace InfraITSolution.Web.Data
         {
         }
 
-      
+        public DbSet<Ticket> Tickets { get; set; }
     }
 }
