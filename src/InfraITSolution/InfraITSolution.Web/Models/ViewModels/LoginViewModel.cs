@@ -1,22 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace InfraITSolution.Web.Models.ViewModels
+namespace InfraITSolution.Web.Models
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Display(Name = "Remember me")]
-        public bool RememberMr { get; set; }
+        public bool RememberMe { get; set; }
 
-        public string ReturnUrl { get; set; }
+        
     }
 }
